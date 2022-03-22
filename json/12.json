@@ -1,0 +1,13 @@
+{
+    "tokenid": 12,
+    "description": "Valentino Rossi", 
+    "image": "https://ipfs.io/ipfs/QmTHRSUTst13z4otSV3BEbMeJP9yBTNS7AZvfd4txfzi9k/12.png", 
+    "name": "Rossi#3",
+    "attributes": [
+        { "trait_type": "Team", "value": "Ducati" },      
+        { "trait_type": "Country", "value": "Australia" },      
+        { "trait_type": "Power","value": "Most Victories" }
+    ]
+  }
+
+

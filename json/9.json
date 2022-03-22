@@ -1,0 +1,13 @@
+{
+    "tokenid": 9,
+    "description": "Marc Marquez", 
+    "image": "https://ipfs.io/ipfs/QmTHRSUTst13z4otSV3BEbMeJP9yBTNS7AZvfd4txfzi9k/9.png", 
+    "name": "Marquez#3",
+    "attributes": [
+        { "trait_type": "Team", "value": "Ducati" },      
+        { "trait_type": "Country", "value": "Australia" },      
+        { "trait_type": "Power","value": "Upper arm and elbow Down" }
+    ]
+  }
+
+

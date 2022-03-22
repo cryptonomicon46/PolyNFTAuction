@@ -1,0 +1,13 @@
+{
+    "tokenid": 1,
+    "description": "Casey Stoner", 
+    "image": "https://ipfs.io/ipfs/QmNMCfhDSotRsG2zLVP8NaX4iSeajx4FQD6cZLBMRkg9tE?filename=1.png", 
+    "name": "CaseyStoner#1",
+    "attributes": [
+        { "trait_type": "Team", "value": "Ducati" },      
+        { "trait_type": "Country", "value": "Australia" },      
+        { "trait_type": "Power","value": "Elbow Down" }
+    ]
+  }
+
+

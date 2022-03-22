@@ -1,0 +1,13 @@
+{
+    "tokenid": 10,
+    "description": "Valentino Rossi", 
+    "image": "https://ipfs.io/ipfs/QmTHRSUTst13z4otSV3BEbMeJP9yBTNS7AZvfd4txfzi9k/10.png", 
+    "name": "Rossi#1",
+    "attributes": [
+        { "trait_type": "Team", "value": "Yamaha" },      
+        { "trait_type": "Country", "value": "Italy" },      
+        { "trait_type": "Power","value": "Wheelie King" }
+    ]
+  }
+
+

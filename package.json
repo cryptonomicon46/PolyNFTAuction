@@ -1,0 +1,28 @@
+{
+  "name": "polydeploy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@maticnetwork/maticjs": "^3.2.4",
+    "@maticnetwork/maticjs-plasma": "^1.0.3",
+    "@openzeppelin/contracts": "^4.5.0",
+    "@truffle/hdwallet-provider": "^2.0.4",
+    "chai-as-promised": "^7.1.1",
+    "dotenv": "^16.0.0",
+    "web3": "^1.7.1",
+    "web3-eth-accounts": "^1.7.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "truffle-plugin-verify": "^0.5.24"
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "tokenid": 11,
+    "description": "Valentino Rossi", 
+    "image": "https://ipfs.io/ipfs/QmTHRSUTst13z4otSV3BEbMeJP9yBTNS7AZvfd4txfzi9k/11.png", 
+    "name": "Rossi#2",
+    "attributes": [
+        { "trait_type": "Team", "value": "Ducati" },      
+        { "trait_type": "Country", "value": "Australia" },      
+        { "trait_type": "Power","value": "OG of MotoGP" }
+    ]
+  }
+
+
