@@ -25,10 +25,13 @@ async function main() {
     const web3instance = new web3(provider)
 
 
+
+
         //To Poly test net
+    MotoPunks_build = require('../build/polygon-contracts/MotoPunks.json')
     const nftContract = new web3instance.eth.Contract(
     MotoPunks_build.abi,
-    MotoPunks_build.networks[80001].address, 
+    MotoPunks_build.networks[5777].address, 
     { gasLimit: "450000" })
 
 
