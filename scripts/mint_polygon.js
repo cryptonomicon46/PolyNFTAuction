@@ -47,8 +47,6 @@ async function main() {
     console.log(`Total Cost of minting ${MINT_AMOUNT} NFTs is ${totalCost} ether`)
 
 
- 
-
     const result = await nftContract.methods
     .mint(MINT_AMOUNT)  
    .send({from:OWNER_ADDRESS, value: totalCost, gas: gas})
