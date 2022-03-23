@@ -1,5 +1,13 @@
-// This will automatically mint a portion of the NFTs to the owner 
-
+//OUTPUT 
+// The base cost is 1000000000000000 ether
+// Total Cost of minting 3 NFTs is 3000000000000000 ether
+// Minted creature. Transaction: 0x14b036e055a2550857e5d382fdf0323bf8e89d5f4b6030332c82f270f434b5fc
+// Tokens and token uris minted to the Owner. Token# 1:https://ipfs.io/ipfs/QmPVjb948YN439VMUMMT4o5vwpgzx4YhFAuQF5exgia3W9/1.json
+// Tokens and token uris minted to the Owner. Token# 2:https://ipfs.io/ipfs/QmPVjb948YN439VMUMMT4o5vwpgzx4YhFAuQF5exgia3W9/2.json
+// Tokens and token uris minted to the Owner. Token# 3:https://ipfs.io/ipfs/QmPVjb948YN439VMUMMT4o5vwpgzx4YhFAuQF5exgia3W9/3.json
+// Tokens and token uris minted to the Owner. Token# 4:https://ipfs.io/ipfs/QmPVjb948YN439VMUMMT4o5vwpgzx4YhFAuQF5exgia3W9/4.json
+// Tokens and token uris minted to the Owner. Token# 5:https://ipfs.io/ipfs/QmPVjb948YN439VMUMMT4o5vwpgzx4YhFAuQF5exgia3W9/5.json
+// Tokens and token uris minted to the Owner. Token# 6:https://ipfs.io/ipfs/QmPVjb948YN439VMUMMT4o5vwpgzx4YhFAuQF5exgia3W9/6.json
 
 async function main() { 
     require('dotenv').config();
@@ -7,28 +15,16 @@ async function main() {
     const HDWalletProvider = require('@truffle/hdwallet-provider')
 
     var web3 = require('web3')
-    const mnemonic = process.env["MNEMONIC"]
-    const project_id = process.env["PROJECT_ID"]
-    const OWNER_ADDRESS = process.env.OWNER_ADDRESS
 
 
-    const NUM_RACERS = 12
     const MINT_AMOUNT = 3
     const gas = 450000
     
-    MotoPunks_build = require('../build/polygon-contracts/MotoPunks.json')
-    console.log("MotoPunks Polygon contract address from process env =", MotoPunks_Address)
-
 
     const provider = "HTTP://127.0.0.1:7545"
-    
     const web3instance = new web3(provider)
-
-
-
-
-        //To Poly test net
     MotoPunks_build = require('../build/polygon-contracts/MotoPunks.json')
+
     const nftContract = new web3instance.eth.Contract(
     MotoPunks_build.abi,
     MotoPunks_build.networks[5777].address, 
@@ -37,7 +33,7 @@ async function main() {
 
     const accounts = await web3instance.eth.getAccounts()
 
-    console.log(nftContract)
+    // console.log(nftContract)
     console.log(`Local Ganache account address is ${accounts[0]}`)
     const basecost = await nftContract.methods.cost().call()
     console.log(`The base cost is ${basecost} ether`)
@@ -57,7 +53,7 @@ async function main() {
 
     for(var i =0; i< tokens_minted_ganache.length; i++){
         const uri = await nftContract.methods.tokenURI(tokens_minted_ganache[i]).call()
-        console.log(`Tokens and token uris minted to the Owner ${tokens_minted_ganache[i]}:${uri}`)
+        console.log(`Tokens and token uris minted to the Owner. Token# ${tokens_minted_ganache[i]}:${uri}`)
     }
 
 
