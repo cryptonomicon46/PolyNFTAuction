@@ -14,7 +14,7 @@ contract NFT_Royalty is ERC721Enumerable, Ownable {
     Counters.Counter private _nextTokenId;
 
     address payable artist; //of the NFT or the developer of the smart contract
-    uint256 public royaltyFee = 5; //5% platform fees
+    uint256 public royaltyFee;// = 5; //5% platform fees
 
     string baseURI;
     string public baseExtension = ".json";
@@ -31,19 +31,17 @@ contract NFT_Royalty is ERC721Enumerable, Ownable {
         string memory _name,
         string memory _symbol,
         uint256 _maxSupply,
-        uint256 _allowMintingOn,
         string memory _initBaseURI,
-        address payable _artist
+        address payable _artist,
+        uint256 _royaltyFee
     ) ERC721(_name, _symbol) {
-        if (_allowMintingOn > block.timestamp) {
-            allowMintingAfter = _allowMintingOn - block.timestamp;
-        }
 
         maxSupply = _maxSupply;
         timeDeployed = block.timestamp;
 
         setBaseURI(_initBaseURI);
         artist  = _artist;
+        royaltyFee = _royaltyFee;
     }
 
     // internal
@@ -91,7 +89,7 @@ function transferFrom(
         address from,
         address to,
         uint256 tokenId
-    ) public payable override (ERC721,IERC721) {
+    ) public payable override (ERC721,IERC721){
         //solhint-disable-next-line max-line-length
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
     if(msg.value>0)
@@ -108,7 +106,7 @@ function transferFrom(
         address from,
         address to,
         uint256 tokenId
-    ) public payable  override (ERC721,IERC721){
+    ) public payable  override (ERC721,IERC721) {
         safeTransferFrom(from, to, tokenId, "");
     }
 
@@ -120,7 +118,7 @@ function transferFrom(
         address to,
         uint256 tokenId,
         bytes memory _data
-    ) public payable override (ERC721,IERC721) {
+    ) public payable override  (ERC721,IERC721) {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
     if(msg.value>0)
     {     uint256 royalty = (msg.value*royaltyFee)/100;

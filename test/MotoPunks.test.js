@@ -1,12 +1,6 @@
-
-
 const { assert } = require('chai')
 
 const MotoPunks = artifacts.require("./MotoPunks")
-
-
-
-
 
 require('chai')
     .use(require('chai-as-promised'))
