@@ -2,16 +2,19 @@
 pragma solidity >=0.4.21 <0.9.0;
 
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "./ERC721Enumerable.sol";
+
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 
-contract MotoPunks is ERC721Enumerable, Ownable {
+contract NFT_Royalty is ERC721Enumerable, Ownable {
     using Strings for uint256;
     using Counters for Counters.Counter;
     Counters.Counter private _nextTokenId;
 
+    address payable artist; //of the NFT or the developer of the smart contract
+    uint256 public royaltyFee = 5; //5% platform fees
 
     string baseURI;
     string public baseExtension = ".json";
@@ -29,19 +32,18 @@ contract MotoPunks is ERC721Enumerable, Ownable {
         string memory _symbol,
         uint256 _maxSupply,
         uint256 _allowMintingOn,
-        string memory _initBaseURI
-        // string memory _initNotRevealedUri
+        string memory _initBaseURI,
+        address payable _artist
     ) ERC721(_name, _symbol) {
         if (_allowMintingOn > block.timestamp) {
             allowMintingAfter = _allowMintingOn - block.timestamp;
         }
 
-        // cost = _cost;
         maxSupply = _maxSupply;
         timeDeployed = block.timestamp;
 
         setBaseURI(_initBaseURI);
-        // setNotRevealedURI(_initNotRevealedUri);
+        artist  = _artist;
     }
 
     // internal
@@ -75,11 +77,58 @@ contract MotoPunks is ERC721Enumerable, Ownable {
             require(msg.value >= cost * _mintAmount);
         }
 
+        uint256 royalty = (msg.value*royaltyFee)/100;
+        _payArtist(royalty);
+        _payOwner(msg.value - royalty);
+
         for (uint256 i = 1; i <= _mintAmount; i++) {
             _safeMint(msg.sender, supply + i);
         }
     }
 
+
+function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public payable override (ERC721,IERC721) {
+        //solhint-disable-next-line max-line-length
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+    if(msg.value>0)
+    {     uint256 royalty = (msg.value*royaltyFee)/100;
+        _payArtist(royalty);
+        _payOwner(msg.value - royalty);
+        _transfer(from, to, tokenId);}
+    }
+
+    /**
+     * @dev See {IERC721-safeTransferFrom}.
+     */
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public payable  override (ERC721,IERC721){
+        safeTransferFrom(from, to, tokenId, "");
+    }
+
+    /**
+     * @dev See {IERC721-safeTransferFrom}.
+     */
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory _data
+    ) public payable override (ERC721,IERC721) {
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+    if(msg.value>0)
+    {     uint256 royalty = (msg.value*royaltyFee)/100;
+        _payArtist(royalty);
+        _payOwner(msg.value - royalty);
+        _transfer(from, to, tokenId);
+    }
+    }
     function walletOfOwner(address _owner)
         public
         view
@@ -155,5 +204,14 @@ contract MotoPunks is ERC721Enumerable, Ownable {
             value: address(this).balance
         }("");
         require(success);
+    }
+
+    function _payOwner(uint256 amount) internal {
+        (bool success,) = payable(msg.sender).call{value:amount}("");
+        require(success,"Paying royalty failed");
+    }
+    function _payArtist(uint256 fee) internal {
+        (bool success,) = artist.call{value:fee}("");
+        require(success,"Paying royalty failed");
     }
 }

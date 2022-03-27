@@ -23,6 +23,8 @@ contract DutchAuction is Ownable {
     uint public constant totalPriceChange = startPrice - finalEndPrice;
     address public highestBidder;
     uint256 public highestBid = finalEndPrice; //Set current highest bidder to the final floor price 
+
+
     
     event Start();
     event Bid(address bidder, uint256 amount);
@@ -38,6 +40,7 @@ contract DutchAuction is Ownable {
         nftCollection = IERC721(_nftAddr);
         nftId = tokenId;
         startedAt = block.timestamp;
+
     }
 
     function StartBid(uint256 endTime) public onlyOwner {
