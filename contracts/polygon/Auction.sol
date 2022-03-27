@@ -48,6 +48,8 @@ contract Auction is Ownable {
 
     }
 
+ 
+
     function bid() external payable {
         require(started, "Auction hasn't yet started");
         require(block.timestamp < endAt,"Auction ended!");
@@ -65,9 +67,10 @@ contract Auction is Ownable {
         emit Bid(msg.sender, msg.value);
     }
 
+
     function endbid() external {
         require(started, "Auction hasn't yet started");
-        require(block.timestamp < endAt,"The auction already ended!");
+        require(block.timestamp > endAt,"The auction already ended!");
         require(!ended,"Too late, auction has ended!");
         
         ended= true;
